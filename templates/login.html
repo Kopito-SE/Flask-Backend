@@ -9,17 +9,18 @@
 {% block content %}
 <div class="auth-container">
     <h2>Login</h2>
-    <form method="POST" action="{{ url_for('login') }}" class="auth-form">
+    <form method="POST" action="{{ url_for('login') }}" class="auth-form" autocomplete="off">
+      
         <div class="form-group">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required 
-                   placeholder="Enter your username">
+                   placeholder="Enter your username" autocomplete="off" value="">
         </div>
         
         <div class="form-group">
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required 
-                   placeholder="Enter your password">
+                   placeholder="Enter your password" autocomplete="off" value="">
         </div>
         
         <button type="submit" class="btn btn-primary">Login</button>
@@ -29,4 +30,18 @@
         Don't have an account? <a href="{{ url_for('register') }}">Register here</a>
     </p>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Clear any autofilled values
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
+    
+    // Additional measure: clear fields after a tiny delay to catch late autofills
+    setTimeout(function() {
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+    }, 100);
+});
+</script>
 {% endblock %}
